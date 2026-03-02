@@ -1,16 +1,15 @@
 import type { Metadata } from "next";
-import SideNav from "@/components/layout/SideNav";
+import Navbar from "@/components/layout/Navbar";
 import Script from "next/script";
-import TopNav from "@/components/layout/TopNav";
+import Header from "@/components/layout/Header";
 import { ModeProvider } from "@/components/providers/ModeProvider";
 import "./styles/globals.css";
-
 
 export const metadata: Metadata = {
   title: "Agency Work Area",
   icons: {
     icon: "/favicon.ico",
-  }
+  },
 };
 
 export default function RootLayout({
@@ -20,7 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="">
+      <body className="sw-frame vh-100 d-flex flex-column">
         {/* Load Bootstrap JS once, globally */}
         <Script
           src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
@@ -30,11 +29,10 @@ export default function RootLayout({
         />
         <ModeProvider>
           {children}
-          <SideNav />
-          <TopNav />
+          <Navbar />
+          <Header />
         </ModeProvider>
       </body>
     </html>
   );
 }
-

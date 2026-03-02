@@ -15,6 +15,23 @@
   --sw-text: #6b7484;
   --sw-surface: #f7f7f7;
   --sw-border: #e2e8f0;
+
+  /* Layout heights */
+  --sw-topnav-height: 56px;
+  --sw-navbar-height: 48px;
+
+  /* NEW: gutters + navbar font size */
+  --sw-gutter-x: 8rem;
+  --sw-navbar-font-size: 0.85rem; /* smaller so everything fits one line */
+
+  --sw-frame-max: 1200px;
+
+  /* Responsive gutters:
+     - minimum: 1rem
+     - scales with viewport: 4vw
+     - maximum: 4rem
+  */
+  --sw-frame-pad: clamp(1rem, 4vw, 4rem);
 }
 
 /* ------------------------------------------------------------------ */
@@ -30,11 +47,12 @@ html[data-mode="config"] {
 /* Bootstrap Overrides */
 /* ------------------------------------------------------------------ */
 
-/* Primary color */
 :root {
   --bs-primary: var(--sw-primary);
+
+  /* Note: keeping your production default RGB; if you want accurate RGB
+     in config mode too, we can compute/set a second RGB variable. */
   --bs-primary-rgb: 51, 122, 183;
-  /* default production RGB */
 
   --bs-body-color: var(--sw-text);
   --bs-border-color: var(--sw-border);
@@ -79,6 +97,10 @@ body {
   color: var(--sw-text);
 }
 
+/* ------------------------------------------------------------------ */
+/* Existing small utilities / component styles */
+/* ------------------------------------------------------------------ */
+
 .custom-logo-text {
   color: var(--sw-primary);
   font-weight: 600;
@@ -111,36 +133,69 @@ body {
   font-size: 0.25rem;
 }
 
-:root {
-  --sw-sidebar-width: 15.75rem;
-  --sw-topnav-height: 56px;
+/* ------------------------------------------------------------------ */
+/* NEW Layout Rules (TopNav + Horizontal Navbar) */
+/* ------------------------------------------------------------------ */
+
+/* TopNav is fixed, full width */
+.sw-topnav {
+  left: 0;
+  width: 100%;
 }
 
-/* Desktop layout: sidebar visible, topnav starts after sidebar */
+/* Desktop navbar row (fixed under TopNav) */
+.sw-navbar {
+  left: 0;
+  width: 100%;
+  height: var(--sw-navbar-height);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* NEW: apply gutters (8rem left/right) */
+.sw-gutters {
+  padding-left: var(--sw-gutter-x) !important;
+  padding-right: var(--sw-gutter-x) !important;
+}
+
+/* Make sure dropdown toggles that are buttons look like links */
+.sw-navbar .nav-link {
+  line-height: 1;
+  white-space: nowrap; /* keep items on one line */
+  font-size: var(--sw-navbar-font-size);
+}
+
+.nav-dropdown-item {
+  color: var(--sw-text);
+}
+
+/* Main content wrapper must account for fixed bars */
+.body {
+  padding-top: var(--sw-topnav-height);
+}
+
+/* On lg+ add navbar height too */
 @media (min-width: 992px) {
   body {
-    padding-left: var(--sw-sidebar-width);
-    padding-top: var(--sw-topnav-height);
-  }
-
-  .sw-topnav {
-    left: var(--sw-sidebar-width);
-    width: calc(100% - var(--sw-sidebar-width));
-  }
-
-  .sw-sidenav {
-    width: var(--sw-sidebar-width);
+    padding-top: calc(var(--sw-topnav-height) + var(--sw-navbar-height));
   }
 }
 
-/* Mobile/tablet: sidebar hidden until opened; topnav full width */
+/* Mobile: navbar row does not exist (offcanvas only), so no extra padding needed */
 @media (max-width: 991.98px) {
   body {
     padding-top: var(--sw-topnav-height);
   }
+}
 
-  .sw-topnav {
-    left: 0;
-    width: 100%;
-  }
+/* ------------------------- */
+/* Centered frame wrapper    */
+/* ------------------------- */
+.sw-frame {
+  max-width: var(--sw-frame-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--sw-frame-pad);
+  padding-right: var(--sw-frame-pad);
 }

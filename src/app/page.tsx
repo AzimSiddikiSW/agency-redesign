@@ -11,62 +11,37 @@ import ModuleEmptyState from "@/components/awa/ModuleEmptyState";
 
 export default function Home() {
   return (
-    <div className="m-4">
-      <div className="">
+    <div className="m-4" style={{ height: "calc(100vh - 2rem)" }}>
+      <div className="row gap-4 h-100">
         {/* page header */}
-        <div className="mb-4 flex-shrink-0">
-          <div className="d-flex align-items-center justify-content-between">
-            {/* Tabs */}
-            <div className="d-flex d-none d-md-block">
-              <div className="d-flex align-items-center border rounded-3 w-fit-content w-md-auto">
-                <span className="btn py-2 px-4 bg-sw text-white rounded-end-0 d-flex align-items-center justify-content-center gap-2 flex-fill flex-md-grow-0">
-                  <BsClockHistory size={18} />
-                  Pending
-                </span>
-                <span className="btn rounded-0 py-2 px-4 bg-light border-start border-end d-flex align-items-center justify-content-center gap-2 flex-fill flex-md-grow-0">
-                  <BsBuildings size={18} />
-                  Identifiers
-                </span>
-                <span className="btn rounded-start-0 py-2 px-4 bg-light rounded-end d-flex align-items-center justify-content-center gap-2 flex-fill flex-md-grow-0">
-                  <BsCalendar3 size={18} />
-                  Schedule
-                </span>
-              </div>
-            </div>
-            <div className="d-md-none">
-              <div className="d-flex align-items-center border rounded-3 w-fit-content w-md-auto">
-                <span className="btn rounded-end-0 py-2 px-4 bg-sw text-white rounded-start d-flex align-items-center justify-content-center gap-2 flex-fill flex-md-grow-0">
-                  <BsClockHistory size={24} />
-                </span>
-                <span className="btn rounded-0 py-2 px-4 bg-light border-start border-end d-flex align-items-center justify-content-center gap-2 flex-fill flex-md-grow-0">
-                  <BsBuildings size={24} />
-                </span>
-                <span className="btn rounded-start-0 py-2 px-4 bg-light rounded-end d-flex align-items-center justify-content-center gap-2 flex-fill flex-md-grow-0">
-                  <BsCalendar3 size={24} />
-                </span>
-              </div>
-            </div>
-
-            {/* Desktop/Tablet: New Inspection button inline */}
-            <div className=" ms-3">
-              <button className="d-none d-md-block btn btn-primary">
-                <span className="d-flex align-items-center gap-1">
-                  <BsPencilSquare size={18} />
-                  <span>New Inspection</span>
-                </span>
-              </button>
-              <button className="d-md-none btn btn-primary">
-                <span className="d-flex align-items-center gap-1">
-                  <BsPencilSquare size={24} />
-                </span>
-              </button>
-            </div>
-          </div>
-        </div>
 
         {/* main workspace with modules */}
-        <div className="row g-4 mb-4 mb-2 pb-4">
-          <div className="col-12 col-md-6">
+        <div className="col-12 col-md-12 col-lg-8 col d-flex flex-column h-100">
+          <div className="mb-4 flex-shrink-0">
+            <div className="d-flex align-items-center justify-content-between">
+              <h3>Pending</h3>
+
+              {/* Desktop/Tablet: New Inspection button inline */}
+              <div className=" ms-3">
+                <button className="d-none d-md-block btn btn-primary">
+                  <span className="d-flex align-items-center gap-1">
+                    <BsPencilSquare size={18} />
+                    <span>New Inspection</span>
+                  </span>
+                </button>
+                <button className="d-md-none btn btn-primary">
+                  <span className="d-flex align-items-center gap-1">
+                    <BsPencilSquare size={24} />
+                  </span>
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <span></span>
+            </div>
+          </div>
+          <div className="flex-grow-1 min-h-0" style={{ minHeight: 0 }}>
             <DashboardModule label="Inspections" expandable>
               {/* <ModuleEmptyState inspection /> */}
 
@@ -93,26 +68,26 @@ export default function Home() {
               />
             </DashboardModule>
           </div>
-          <div className="col-12 col-md-6">
+          {/* <div className="col-12 col-md-6">
             <DashboardModule label="Corrections" expandable>
               <ModuleEmptyState />
             </DashboardModule>
-          </div>
+          </div> */}
         </div>
 
         {/* progress tracking modules */}
-        <div className="row g-4">
-          <div className="col-12 col-md-4">
+        <div className="col d-none d-lg-flex flex-column h-100 gap-4">
+          <div className="flex-grow-1" style={{ minHeight: 0 }}>
             <DashboardModule label="Module">
               <ModuleEmptyState defaultModule />
             </DashboardModule>
           </div>
-          <div className="col-12 col-md-4">
+          <div className="flex-grow-1" style={{ minHeight: 0 }}>
             <DashboardModule label="Module">
               <ModuleEmptyState defaultModule />
             </DashboardModule>
           </div>
-          <div className="col-12 col-md-4">
+          <div className="flex-grow-1" style={{ minHeight: 0 }}>
             <DashboardModule label="Module">
               <ModuleEmptyState defaultModule />
             </DashboardModule>
