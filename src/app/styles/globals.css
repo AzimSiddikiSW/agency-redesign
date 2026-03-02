@@ -1,0 +1,146 @@
+@import "bootstrap/dist/css/bootstrap.min.css";
+/* ------------------------------------------------------------------ */
+/* Base Design Tokens */
+/* ------------------------------------------------------------------ */
+
+:root {
+  /* Mode-driven primary */
+  --sw-primary-production: #337ab7;
+  --sw-primary-config: #343a40;
+
+  /* Default to production */
+  --sw-primary: var(--sw-primary-production);
+
+  /* Text + surfaces */
+  --sw-text: #6b7484;
+  --sw-surface: #f7f7f7;
+  --sw-border: #e2e8f0;
+}
+
+/* ------------------------------------------------------------------ */
+/* Mode Switching */
+/* Set this on <html data-mode="config"> to switch */
+/* ------------------------------------------------------------------ */
+
+html[data-mode="config"] {
+  --sw-primary: var(--sw-primary-config);
+}
+
+/* ------------------------------------------------------------------ */
+/* Bootstrap Overrides */
+/* ------------------------------------------------------------------ */
+
+/* Primary color */
+:root {
+  --bs-primary: var(--sw-primary);
+  --bs-primary-rgb: 51, 122, 183;
+  /* default production RGB */
+
+  --bs-body-color: var(--sw-text);
+  --bs-border-color: var(--sw-border);
+  --bs-body-bg: #ffffff;
+}
+
+/* Surface background (navs, cards, panels) */
+.bg-light {
+  background-color: var(--sw-surface) !important;
+}
+
+.bg-sw {
+  background-color: var(--sw-primary) !important;
+}
+
+.text-sw {
+  color: var(--sw-primary) !important;
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: var(--sw-primary);
+  border-color: var(--sw-primary);
+}
+
+.btn-primary:hover {
+  filter: brightness(0.95);
+}
+
+/* Cards + Panels */
+.card {
+  border-color: var(--sw-border);
+  background-color: var(--sw-surface);
+}
+
+/* Inputs */
+.form-control {
+  border-color: var(--sw-border);
+}
+
+body {
+  color: var(--sw-text);
+}
+
+.custom-logo-text {
+  color: var(--sw-primary);
+  font-weight: 600;
+  font-size: 1.75rem;
+}
+
+.user-menu {
+  padding: 0px 8px;
+  font-size: 0.875rem;
+}
+
+.user-menu-dropdown {
+  border-bottom-left-radius: 0px;
+  border-top-left-radius: 0px;
+}
+
+.notifications-btn {
+  border: none;
+  display: flex;
+  align-items: center;
+  background: none;
+  color: var(--bs-primary);
+}
+
+.fs-half {
+  font-size: 0.75rem;
+}
+
+.fs-quarter {
+  font-size: 0.25rem;
+}
+
+:root {
+  --sw-sidebar-width: 15.75rem;
+  --sw-topnav-height: 56px;
+}
+
+/* Desktop layout: sidebar visible, topnav starts after sidebar */
+@media (min-width: 992px) {
+  body {
+    padding-left: var(--sw-sidebar-width);
+    padding-top: var(--sw-topnav-height);
+  }
+
+  .sw-topnav {
+    left: var(--sw-sidebar-width);
+    width: calc(100% - var(--sw-sidebar-width));
+  }
+
+  .sw-sidenav {
+    width: var(--sw-sidebar-width);
+  }
+}
+
+/* Mobile/tablet: sidebar hidden until opened; topnav full width */
+@media (max-width: 991.98px) {
+  body {
+    padding-top: var(--sw-topnav-height);
+  }
+
+  .sw-topnav {
+    left: 0;
+    width: 100%;
+  }
+}
