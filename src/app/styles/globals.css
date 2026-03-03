@@ -24,7 +24,7 @@
   --sw-gutter-x: 8rem;
   --sw-navbar-font-size: 0.85rem; /* smaller so everything fits one line */
 
-  --sw-frame-max: 1200px;
+  --sw-frame-max: 1300px;
 
   /* Responsive gutters:
      - minimum: 1rem
@@ -74,10 +74,27 @@ html[data-mode="config"] {
 
 /* Buttons */
 .btn-primary {
-  background-color: var(--sw-primary);
-  border-color: var(--sw-primary);
+  --bs-btn-bg: var(--sw-primary);
+  --bs-btn-border-color: var(--sw-primary);
+
+  --bs-btn-hover-bg: color-mix(in srgb, var(--sw-primary) 90%, black);
+  --bs-btn-hover-border-color: color-mix(in srgb, var(--sw-primary) 90%, black);
+
+  --bs-btn-active-bg: color-mix(in srgb, var(--sw-primary) 85%, black);
+  --bs-btn-active-border-color: color-mix(
+    in srgb,
+    var(--sw-primary) 85%,
+    black
+  );
 }
 
+.border-sw {
+  border-bottom: 2px solid var(--sw-primary);
+}
+
+.border-sw:hover {
+  border-bottom: 2px solid var(--sw-primary);
+}
 .btn-primary:hover {
   filter: brightness(0.95);
 }
@@ -174,6 +191,9 @@ body {
 .body {
   padding-top: var(--sw-topnav-height);
 }
+.table-responsive {
+  max-height: 300px;
+}
 
 /* On lg+ add navbar height too */
 @media (min-width: 992px) {
@@ -187,6 +207,26 @@ body {
   body {
     padding-top: var(--sw-topnav-height);
   }
+}
+
+.sw-page {
+  height: calc(
+    100vh - var(--sw-topnav-height) - var(--sw-navbar-height) - 4rem
+  );
+}
+
+@media (max-width: 770px) {
+  .sw-page {
+    min-height: calc(90vh - 3rem);
+  }
+}
+
+.transition-rotate {
+  transition: transform 0.2s ease;
+}
+
+.rotate-90 {
+  transform: rotate(90deg);
 }
 
 /* ------------------------- */

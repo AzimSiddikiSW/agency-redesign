@@ -1,8 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useMode } from "@/components/providers/ModeProvider";
+import { BsChevronRight } from "react-icons/bs";
+import { useState } from "react";
 
 type NavChild = { label: string; href: string };
 type NavItem = {
@@ -40,19 +42,18 @@ const configNavItems: NavItem[] = [
     children: [
       {
         label: "Content & Templates",
-        href: "/accountConfiguration?tab=content",
+        href: "/contentTemplates",
       },
-      { label: "Job Editor", href: "/accountConfiguration?tab=jobEditor" },
-      { label: "Framework", href: "/accountConfiguration?tab=framework" },
+      { label: "Job Editor", href: "/jobEditor" },
+      { label: "Framework Viewer", href: "/frameworkViewer" },
     ],
   },
-  { label: "Manage Customers", href: "/manageCustomers" },
   {
-    label: "Manage Database",
-    href: "/manageDatabase",
+    label: "Support",
+    href: "/support",
     children: [
-      { label: "Production", href: "/manageDatabase?tab=production" },
-      { label: "Configuration", href: "/manageDatabase?tab=configuration" },
+      { label: "Manage Customers", href: "/manageCustomers" },
+      { label: "Manage Database", href: "/manageDatabase" },
     ],
   },
   { label: "Server Stats", href: "/serverStats" },
@@ -75,10 +76,27 @@ export default function Navbar() {
   const { isConfig } = useMode();
   const pathname = usePathname();
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   const isActive = (href: string) => {
-    if (href === "/") return pathname === "/";
-    return pathname === href || pathname.startsWith(href + "/");
+    const [path, query] = href.split("?");
+
+    // Path must match
+    if (path !== pathname) return false;
+
+    // If no query in href, path match is enough
+    if (!query) return true;
+
+    // Compare query params
+    const hrefParams = new URLSearchParams(query);
+
+    for (const [key, value] of hrefParams.entries()) {
+      if (searchParams.get(key) !== value) {
+        return false;
+      }
+    }
+
+    return true;
   };
 
   const desktopLinkClass = (active: boolean) =>
@@ -101,7 +119,7 @@ export default function Navbar() {
       return (
         <li key={item.href} className="nav-item dropdown">
           <button
-            className={`${desktopLinkClass(active)} dropdown-toggle btn`}
+            className={`${desktopLinkClass(active)} d-flex align-items-center dropdown-toggle btn`}
             type="button"
             data-bs-toggle="dropdown"
             aria-expanded="false"
@@ -113,7 +131,7 @@ export default function Navbar() {
             {item.children.map((child) => (
               <li key={child.href}>
                 <Link
-                  className="dropdown-item nav-link nav-dropdown-item"
+                  className={`${desktopLinkClass(isActive(child.href))} dropdown-item nav-link nav-dropdown-item`}
                   href={child.href}
                 >
                   {child.label}
@@ -124,11 +142,13 @@ export default function Navbar() {
         </li>
       );
     });
+  const [openMobile, setOpenMobile] = useState<Record<string, boolean>>({});
 
   const renderMobileNav = (items: NavItem[], offcanvasId = "swNav") => (
-    <div className="nav nav-pills flex-column gap-1">
+    <div className="nav flex-column gap-1">
       {items.map((item) => {
-        const active = isActive(item.href);
+        const childActive = item.children?.some((c) => isActive(c.href));
+        const active = isActive(item.href) || childActive;
 
         if (!item.children?.length) {
           return (
@@ -136,7 +156,7 @@ export default function Navbar() {
               key={item.href}
               type="button"
               className={`nav-link text-start small ${
-                active ? "btn-primary text-white" : "text-muted"
+                active ? "active fw-semibold" : "text-muted"
               }`}
               onClick={() => {
                 if (item.href !== pathname) router.push(item.href);
@@ -149,37 +169,53 @@ export default function Navbar() {
         }
 
         const collapseId = `swMobileCollapse_${item.label.replace(/\s+/g, "")}`;
+        const isOpen = !!openMobile[collapseId] || active; // auto-open if active
 
         return (
           <div key={item.href} className="d-flex flex-column">
             <button
               type="button"
-              className={`nav-link text-start small ${
-                active ? "btn-primary text-white" : "text-muted"
+              className={`nav-link text-primary text-start small d-flex align-items-center justify-content-between ${
+                active ? "active fw-semibold" : "text-muted"
               }`}
               data-bs-toggle="collapse"
               data-bs-target={`#${collapseId}`}
-              aria-expanded={active ? "true" : "false"}
+              aria-expanded={isOpen ? "true" : "false"}
               aria-controls={collapseId}
+              onClick={() =>
+                setOpenMobile((p) => ({ ...p, [collapseId]: !p[collapseId] }))
+              }
             >
-              {item.label}
+              <span>{item.label}</span>
+
+              <BsChevronRight
+                className={`transition-rotate ${isOpen ? "rotate-90" : ""}`}
+                size={12}
+              />
             </button>
 
-            <div id={collapseId} className={`collapse ${active ? "show" : ""}`}>
+            <div id={collapseId} className={`collapse ${isOpen ? "show" : ""}`}>
               <div className="d-flex flex-column ps-3 mt-1 gap-1">
-                {item.children.map((child) => (
-                  <button
-                    key={child.href}
-                    type="button"
-                    className="nav-link text-start small text-muted"
-                    onClick={() => {
-                      router.push(child.href);
-                      hideOffcanvasById(offcanvasId);
-                    }}
-                  >
-                    {child.label}
-                  </button>
-                ))}
+                {item.children.map((child) => {
+                  const isChildActive = isActive(child.href);
+                  console.log("child", child.href, "active?", isChildActive);
+
+                  return (
+                    <button
+                      key={child.href}
+                      type="button"
+                      className={`nav-link text-primary text-start small ${
+                        isChildActive ? "active fw-semibold" : "text-muted"
+                      }`}
+                      onClick={() => {
+                        router.push(child.href);
+                        hideOffcanvasById(offcanvasId);
+                      }}
+                    >
+                      {child.label}
+                    </button>
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -192,7 +228,7 @@ export default function Navbar() {
     <>
       {/* Desktop horizontal navbar (lg+) */}
       <div
-        className="sw-navbar d-none d-lg-block border-bottom bg-white"
+        className="sw-navbar d-none d-lg-block border-bottom bg-light"
         style={{
           position: "fixed",
           top: "var(--sw-topnav-height)",
@@ -202,7 +238,7 @@ export default function Navbar() {
         }}
       >
         <div className="h-100 sw-frame">
-          <div className="h-100 d-flex align-items-center justify-content-center">
+          <div className={`h-100 d-flex align-items-center `}>
             <ul className="nav align-items-center flex-nowrap">
               {renderDesktopNav(navItems)}
 
@@ -233,8 +269,17 @@ export default function Navbar() {
         tabIndex={-1}
         id="swNav"
       >
-        <div className="offcanvas-header border-bottom">
-          <span className="fw-semibold">Menu</span>
+        <div className="offcanvas-header border-bottom gap-2">
+          {isConfig ? (
+            <img
+              src="/icons/favicon-32x32-bw.png"
+              alt="SansWrite"
+              height={24}
+            />
+          ) : (
+            <img src="/icons/favicon-32x32.png" alt="SansWrite" height={24} />
+          )}
+          <span className="fw-semibold d-none d-sm-inline">SansWrite</span>
           <button
             type="button"
             className="btn-close"
