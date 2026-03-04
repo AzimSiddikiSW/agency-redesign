@@ -11,8 +11,11 @@ import ModuleEmptyState from "@/components/awa/ModuleEmptyState";
 
 export default function Home() {
   return (
-    <div className="m-4">
-      <div className="">
+    <div className="m-4 ">
+      <div
+        className="d-flex flex-column"
+        style={{ height: "calc(100vh - 9rem)" }}
+      >
         {/* page header */}
         <div className="mb-4 flex-shrink-0">
           <div className="d-flex align-items-center justify-content-between">
@@ -64,56 +67,142 @@ export default function Home() {
           </div>
         </div>
 
-        {/* main workspace with modules */}
-        <div className="row g-4 mb-4 mb-2 pb-4">
-          <div className="col-12 col-md-6">
-            <DashboardModule label="Inspections" expandable>
-              {/* <ModuleEmptyState inspection /> */}
+        {/* ── DESKTOP: two-row layout that fills remaining height ── */}
+        <div className="d-none d-md-flex flex-column flex-grow-1 gap-4 min-h-0">
+          {/* Top row: MUST be allowed to shrink + MUST hide overflow */}
+          <div
+            className="row g-4 flex-grow-1 h-100 pb-4"
+            style={{ minHeight: "400px !important" }}
+          >
+            <div className="col-6 d-flex flex-column h-100">
+              <DashboardModule
+                label="Inspections"
+                expandable
+                className="flex-grow-1 min-h-0"
+              >
+                <InspectionItem
+                  name="Abode Care of Monroeville"
+                  identifier="45119"
+                  address="5 Cedar Park Boulevard, Easton, PA 18042"
+                  date="10/29/2025"
+                  status="Partial"
+                />
+                <InspectionItem
+                  name="Abode Care of Monroeville"
+                  identifier="45119"
+                  address="5 Cedar Park Boulevard, Easton, PA 18042"
+                  date="10/29/2025"
+                  status="Partial"
+                />
+                <InspectionItem
+                  name="Abode Care of Monroeville"
+                  identifier="45119"
+                  address="5 Cedar Park Boulevard, Easton, PA 18042"
+                  date="10/29/2025"
+                  status="Partial"
+                />
+                <InspectionItem
+                  name="Abode Care of Monroeville"
+                  identifier="45119"
+                  address="5 Cedar Park Boulevard, Easton, PA 18042"
+                  date="10/29/2025"
+                  status="Partial"
+                />
+                <InspectionItem
+                  name="Abode Care of Monroeville"
+                  identifier="45119"
+                  address="5 Cedar Park Boulevard, Easton, PA 18042"
+                  date="10/29/2025"
+                  status="Partial"
+                />
+                <InspectionItem
+                  name="Abode Care of Monroeville"
+                  identifier="45119"
+                  address="5 Cedar Park Boulevard, Easton, PA 18042"
+                  date="10/29/2025"
+                  status="Partial"
+                />
+                <InspectionItem
+                  name="Abode Care of Monroeville"
+                  identifier="45119"
+                  address="5 Cedar Park Boulevard, Easton, PA 18042"
+                  date="10/29/2025"
+                  status="Partial"
+                />
+              </DashboardModule>
+            </div>
 
-              <InspectionItem
-                name="Abode Care of Monroeville"
-                identifier="45119"
-                address="5 Cedar Park Boulevard, Easton, PA 18042"
-                date="10/29/2025"
-                status="Partial"
-              />
-              <InspectionItem
-                name="Abode Care of Monroeville"
-                identifier="45119"
-                address="5 Cedar Park Boulevard, Easton, PA 18042"
-                date="10/29/2025"
-                status="Partial"
-              />
-              <InspectionItem
-                name="Abode Care of Monroeville"
-                identifier="45119"
-                address="5 Cedar Park Boulevard, Easton, PA 18042"
-                date="10/29/2025"
-                status="Partial"
-              />
-            </DashboardModule>
+            <div className="col-6 d-flex flex-column min-h-0 h-100">
+              <DashboardModule label="Corrections" expandable className="h-100">
+                <ModuleEmptyState defaultModule />
+              </DashboardModule>
+            </div>
           </div>
-          <div className="col-12 col-md-6">
-            <DashboardModule label="Corrections" expandable>
-              <ModuleEmptyState />
-            </DashboardModule>
+
+          {/* Bottom row: fixed height */}
+          <div className="row g-4 flex-shrink-0" style={{ height: 300 }}>
+            <div className="col-4 h-100">
+              <DashboardModule label="Module" className="h-100">
+                <ModuleEmptyState defaultModule />
+              </DashboardModule>
+            </div>
+            <div className="col-4 h-100">
+              <DashboardModule label="Module" className="h-100">
+                <ModuleEmptyState defaultModule />
+              </DashboardModule>
+            </div>
+            <div className="col-4 h-100">
+              <DashboardModule label="Module" className="h-100">
+                <ModuleEmptyState defaultModule />
+              </DashboardModule>
+            </div>
           </div>
         </div>
 
-        {/* progress tracking modules */}
-        <div className="row g-4">
-          <div className="col-12 col-md-4">
-            <DashboardModule label="Module">
+        {/* ── MOBILE: stacked layout, each module has a fixed/min height ── */}
+        <div className="d-md-none d-flex flex-column gap-4 pb-4">
+          <div style={{ height: 350 }}>
+            <DashboardModule label="Inspections" expandable className="h-100">
+              <InspectionItem
+                name="Abode Care of Monroeville"
+                identifier="45119"
+                address="5 Cedar Park Boulevard, Easton, PA 18042"
+                date="10/29/2025"
+                status="Partial"
+              />
+              <InspectionItem
+                name="Abode Care of Monroeville"
+                identifier="45119"
+                address="5 Cedar Park Boulevard, Easton, PA 18042"
+                date="10/29/2025"
+                status="Partial"
+              />
+              <InspectionItem
+                name="Abode Care of Monroeville"
+                identifier="45119"
+                address="5 Cedar Park Boulevard, Easton, PA 18042"
+                date="10/29/2025"
+                status="Partial"
+              />
+            </DashboardModule>
+          </div>
+          <div style={{ height: 350 }}>
+            <DashboardModule label="Corrections" expandable className="h-100">
               <ModuleEmptyState defaultModule />
             </DashboardModule>
           </div>
-          <div className="col-12 col-md-4">
-            <DashboardModule label="Module">
+          <div style={{ height: 250 }}>
+            <DashboardModule label="Module" className="h-100">
               <ModuleEmptyState defaultModule />
             </DashboardModule>
           </div>
-          <div className="col-12 col-md-4">
-            <DashboardModule label="Module">
+          <div style={{ height: 250 }}>
+            <DashboardModule label="Module" className="h-100">
+              <ModuleEmptyState defaultModule />
+            </DashboardModule>
+          </div>
+          <div style={{ height: 250 }}>
+            <DashboardModule label="Module" className="h-100">
               <ModuleEmptyState defaultModule />
             </DashboardModule>
           </div>

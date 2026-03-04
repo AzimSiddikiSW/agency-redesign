@@ -14,10 +14,8 @@ export default function DashboardModule({
   className = "",
 }: DashboardModuleProps) {
   return (
-    // w-100 h-100
     <div
-      className={`border rounded-3 d-flex flex-column w-100 h-100 shadow-sm ${className}`}
-      style={{ minHeight: "0px" }}
+      className={`border rounded-3 d-flex flex-column w-100 h-100 shadow-sm overflow-hidden min-h-0 ${className}`}
     >
       <div className="d-flex align-items-center justify-content-between bg-sw p-2 ps-3 rounded-top text-white">
         <h2 className="h5 mb-0 fw-normal">{label}</h2>
@@ -32,7 +30,7 @@ export default function DashboardModule({
       </div>
 
       <div
-        className="p-2 d-flex flex-column gap-2 overflow-auto"
+        className="p-2 d-flex flex-column gap-2 overflow-y-auto flex-grow-1"
         style={{ minHeight: 0 }}
       >
         {children ?? (

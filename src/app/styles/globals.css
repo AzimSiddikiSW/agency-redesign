@@ -60,8 +60,23 @@ html[data-mode="config"] {
   border-color: var(--sw-primary);
 }
 
+/* Buttons */
+.btn-primary {
+  --bs-btn-bg: var(--sw-primary);
+  --bs-btn-border-color: var(--sw-primary);
+
+  --bs-btn-hover-bg: color-mix(in srgb, var(--sw-primary) 90%, black);
+  --bs-btn-hover-border-color: color-mix(in srgb, var(--sw-primary) 90%, black);
+
+  --bs-btn-active-bg: color-mix(in srgb, var(--sw-primary) 85%, black);
+  --bs-btn-active-border-color: color-mix(
+    in srgb,
+    var(--sw-primary) 85%,
+    black
+  );
+}
 .btn-primary:hover {
-  filter: brightness(0.95);
+  filter: brightness(0.85);
 }
 
 /* Cards + Panels */
@@ -143,4 +158,14 @@ body {
     left: 0;
     width: 100%;
   }
+}
+
+.sw-page {
+  height: calc(
+    100vh - var(--sw-topnav-height) - var(--sw-navbar-height) - 4rem
+  );
+}
+
+.min-h-0 {
+  min-height: 0 !important;
 }
