@@ -198,7 +198,6 @@ export default function Navbar() {
               <div className="d-flex flex-column ps-3 mt-1 gap-1">
                 {item.children.map((child) => {
                   const isChildActive = isActive(child.href);
-                  console.log("child", child.href, "active?", isChildActive);
 
                   return (
                     <button
