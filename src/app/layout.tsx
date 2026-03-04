@@ -3,6 +3,7 @@ import Navbar from "@/components/layout/Navbar";
 import Script from "next/script";
 import Header from "@/components/layout/Header";
 import { ModeProvider } from "@/components/providers/ModeProvider";
+import { Suspense } from "react";
 import "./styles/globals.css";
 
 export const metadata: Metadata = {
@@ -29,7 +30,10 @@ export default function RootLayout({
         />
         <ModeProvider>
           {children}
-          <Navbar />
+
+          <Suspense fallback={null}>
+            <Navbar />
+          </Suspense>
           <Header />
         </ModeProvider>
       </body>
