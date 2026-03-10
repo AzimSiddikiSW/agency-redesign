@@ -138,48 +138,56 @@ export default function SideNav() {
   };
 
   const renderActions = () => {
-    return (
-      <div className="d-flex flex-column gap-2 mb-3">
-        <button
-          className="btn btn-outline-primary text-start shadow-sm"
-          onClick={() => openModal("newInspection")}
-        >
-          <BsPencilSquare size={18} className="me-2" />
-          New Inspection
-        </button>
+    if (pathname === "/") {
+      return (
+        <>
+          <div className="mt-2 mb-2 small fs-half text-uppercase text-muted fw-semibold">
+            Actions
+          </div>
+          <div className="d-flex flex-column gap-2 mb-3">
+            <button
+              className="btn btn-outline-primary text-start shadow-sm"
+              onClick={() => openModal("newInspection")}
+            >
+              <BsPencilSquare size={18} className="me-2" />
+              New Inspection
+            </button>
 
-        <button
-          className="btn btn-outline-primary text-start shadow-sm"
-          onClick={() => openModal("manageInspections")}
-        >
-          <BsClipboard size={18} className="me-2" />
-          Manage Inspections
-        </button>
-        <button
-          className="btn btn-outline-primary text-start shadow-sm"
-          onClick={() => openModal("publishInspections")}
-        >
-          <BsSend size={18} className="me-2" />
-          Publish Inspections
-        </button>
+            <button
+              className="btn btn-outline-primary text-start shadow-sm"
+              onClick={() => openModal("manageInspections")}
+            >
+              <BsClipboard size={18} className="me-2" />
+              Manage Inspections
+            </button>
+            <button
+              className="btn btn-outline-primary text-start shadow-sm"
+              onClick={() => openModal("publishInspections")}
+            >
+              <BsSend size={18} className="me-2" />
+              Publish Inspections
+            </button>
 
-        <button
-          className="btn btn-outline-primary text-start shadow-sm"
-          onClick={() => openModal("manageCorrections")}
-        >
-          <BsClipboardCheck size={18} className="me-2" />
-          Manage Corrections
-        </button>
+            <button
+              className="btn btn-outline-primary text-start shadow-sm"
+              onClick={() => openModal("manageCorrections")}
+            >
+              <BsClipboardCheck size={18} className="me-2" />
+              Manage Corrections
+            </button>
 
-        <button
-          className="btn btn-outline-primary text-start shadow-sm"
-          onClick={() => openModal("publishCorrections")}
-        >
-          <BsSend size={18} className="me-2" />
-          Publish Corrections
-        </button>
-      </div>
-    );
+            <button
+              className="btn btn-outline-primary text-start shadow-sm"
+              onClick={() => openModal("publishCorrections")}
+            >
+              <BsSend size={18} className="me-2" />
+              Publish Corrections
+            </button>
+          </div>
+        </>
+      );
+    }
+    return <></>;   
   };
 
   return (
@@ -205,9 +213,7 @@ export default function SideNav() {
 
         <div className="p-3 overflow-auto">
           <nav className="nav nav-pills flex-column gap-1">
-            <div className="mt-2 mb-2 small fs-half text-uppercase text-muted fw-semibold">
-              Actions
-            </div>
+
             {renderActions()}
             <div className="mt-2 mb-2 small fs-half text-uppercase text-muted fw-semibold">
               Pages
