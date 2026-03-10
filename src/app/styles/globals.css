@@ -78,7 +78,24 @@ html[data-mode="config"] {
 .btn-primary:hover {
   filter: brightness(0.85);
 }
+.btn-outline-primary {
+  --bs-btn-color: var(--sw-primary);
+  --bs-btn-border-color: var(--sw-primary);
 
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: var(--sw-primary);
+  --bs-btn-hover-border-color: var(--sw-primary);
+
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: color-mix(in srgb, var(--sw-primary) 90%, black);
+  --bs-btn-active-border-color: color-mix(
+    in srgb,
+    var(--sw-primary) 90%,
+    black
+  );
+
+  --bs-btn-focus-shadow-rgb: var(--bs-primary-rgb);
+}
 /* Cards + Panels */
 .card {
   border-color: var(--sw-border);
@@ -168,4 +185,35 @@ body {
 
 .min-h-0 {
   min-height: 0 !important;
+}
+
+.sw-manage-inspections-modal {
+  max-width: 580px;
+}
+
+.sw-modal-panel {
+  background-color: #ffffff;
+  border-radius: 0.75rem;
+}
+
+.sw-modal-header-bar {
+  background-color: var(--sw-primary);
+  color: #fff;
+  padding: 0.875rem 1rem;
+}
+
+.sw-modal-tabs .btn {
+  min-width: 140px;
+}
+
+.sw-modal-body-panel {
+  min-height: 360px;
+  /* background-color: var(--sw-surface); */
+  /* border: 1px solid var(--sw-border); */
+  /* border-radius: 0.75rem; */
+  overflow: auto;
+}
+
+.sw-modal-footer {
+  background-color: color-mix(in srgb, var(--sw-primary) 6%, white);
 }

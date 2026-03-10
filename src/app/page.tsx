@@ -4,7 +4,7 @@ import {
   BsPencilSquare,
   BsBuildings,
   BsCalendar3,
-  BsClockHistory,
+  BsGrid,
 } from "react-icons/bs";
 import InspectionItem from "@/components/awa/InspectionItem";
 import ModuleEmptyState from "@/components/awa/ModuleEmptyState";
@@ -23,8 +23,8 @@ export default function Home() {
             <div className="d-flex d-none d-md-block">
               <div className="d-flex align-items-center border rounded-3 w-fit-content w-md-auto">
                 <span className="btn py-2 px-4 bg-sw text-white rounded-end-0 d-flex align-items-center justify-content-center gap-2 flex-fill flex-md-grow-0">
-                  <BsClockHistory size={18} />
-                  Pending
+                  <BsGrid size={18} />
+                  Dashboard
                 </span>
                 <span className="btn rounded-0 py-2 px-4 bg-light border-start border-end d-flex align-items-center justify-content-center gap-2 flex-fill flex-md-grow-0">
                   <BsBuildings size={18} />
@@ -39,7 +39,7 @@ export default function Home() {
             <div className="d-md-none">
               <div className="d-flex align-items-center border rounded-3 w-fit-content w-md-auto">
                 <span className="btn rounded-end-0 py-2 px-4 bg-sw text-white rounded-start d-flex align-items-center justify-content-center gap-2 flex-fill flex-md-grow-0">
-                  <BsClockHistory size={24} />
+                  <BsGrid size={24} />
                 </span>
                 <span className="btn rounded-0 py-2 px-4 bg-light border-start border-end d-flex align-items-center justify-content-center gap-2 flex-fill flex-md-grow-0">
                   <BsBuildings size={24} />
@@ -51,7 +51,7 @@ export default function Home() {
             </div>
 
             {/* Desktop/Tablet: New Inspection button inline */}
-            <div className=" ms-3">
+            {/* <div className=" ms-3">
               <button className="d-none d-md-block btn btn-primary">
                 <span className="d-flex align-items-center gap-1">
                   <BsPencilSquare size={18} />
@@ -63,7 +63,7 @@ export default function Home() {
                   <BsPencilSquare size={24} />
                 </span>
               </button>
-            </div>
+            </div> */}
           </div>
         </div>
 
@@ -77,37 +77,8 @@ export default function Home() {
             <div className="col-6 d-flex flex-column h-100">
               <DashboardModule
                 label="Inspections"
-                expandable
                 className="flex-grow-1 min-h-0"
               >
-                <InspectionItem
-                  name="Abode Care of Monroeville"
-                  identifier="45119"
-                  address="5 Cedar Park Boulevard, Easton, PA 18042"
-                  date="10/29/2025"
-                  status="Partial"
-                />
-                <InspectionItem
-                  name="Abode Care of Monroeville"
-                  identifier="45119"
-                  address="5 Cedar Park Boulevard, Easton, PA 18042"
-                  date="10/29/2025"
-                  status="Partial"
-                />
-                <InspectionItem
-                  name="Abode Care of Monroeville"
-                  identifier="45119"
-                  address="5 Cedar Park Boulevard, Easton, PA 18042"
-                  date="10/29/2025"
-                  status="Partial"
-                />
-                <InspectionItem
-                  name="Abode Care of Monroeville"
-                  identifier="45119"
-                  address="5 Cedar Park Boulevard, Easton, PA 18042"
-                  date="10/29/2025"
-                  status="Partial"
-                />
                 <InspectionItem
                   name="Abode Care of Monroeville"
                   identifier="45119"
@@ -133,8 +104,31 @@ export default function Home() {
             </div>
 
             <div className="col-6 d-flex flex-column min-h-0 h-100">
-              <DashboardModule label="Corrections" expandable className="h-100">
-                <ModuleEmptyState defaultModule />
+              <DashboardModule label="Corrections" className="h-100">
+                <InspectionItem
+                  name="Abode Care of Monroeville"
+                  identifier="45119"
+                  address="5 Cedar Park Boulevard, Easton, PA 18042"
+                  date="10/29/2025"
+                  status="Partial"
+                  correction
+                />
+                <InspectionItem
+                  name="Abode Care of Monroeville"
+                  identifier="45119"
+                  address="5 Cedar Park Boulevard, Easton, PA 18042"
+                  date="10/29/2025"
+                  status="Partial"
+                  correction
+                />
+                <InspectionItem
+                  name="Abode Care of Monroeville"
+                  identifier="45119"
+                  address="5 Cedar Park Boulevard, Easton, PA 18042"
+                  date="10/29/2025"
+                  status="Partial"
+                  correction
+                />
               </DashboardModule>
             </div>
           </div>
