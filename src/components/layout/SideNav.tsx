@@ -15,6 +15,8 @@ import {
   BsPencilSquare,
   BsClipboard,
   BsClipboardCheck,
+  BsPencil,
+  BsSend
 } from "react-icons/bs";
 import { useMode } from "@/components/providers/ModeProvider";
 import { useState } from "react";
@@ -69,6 +71,13 @@ export default function SideNav() {
 
   const openModal = (type: string) => {
     setModalType(type);
+    if (type === "manageInspections") {
+      setActiveInspectionTab("all");
+    }
+
+    if (type === "publishInspections") {
+      setActiveInspectionTab("completed");
+    }
     setShowModal(true);
   };
 
@@ -146,6 +155,13 @@ export default function SideNav() {
           <BsClipboard size={18} className="me-2" />
           Manage Inspections
         </button>
+        <button
+          className="btn btn-outline-primary text-start shadow-sm"
+          onClick={() => openModal("publishInspections")}
+        >
+          <BsSend size={18} className="me-2" />
+          Publish Inspections
+        </button>
 
         <button
           className="btn btn-outline-primary text-start shadow-sm"
@@ -153,6 +169,14 @@ export default function SideNav() {
         >
           <BsClipboardCheck size={18} className="me-2" />
           Manage Corrections
+        </button>
+
+        <button
+          className="btn btn-outline-primary text-start shadow-sm"
+          onClick={() => openModal("publishCorrections")}
+        >
+          <BsSend size={18} className="me-2" />
+          Publish Corrections
         </button>
       </div>
     );
@@ -259,13 +283,13 @@ export default function SideNav() {
           </nav>
         </div>
       </div>
-      {showModal && modalType === "manageInspections" && (
+      {showModal && (modalType === "manageInspections" || modalType === "publishInspections") && (
         <>
           <div className="modal fade show d-block" tabIndex={-1}>
             <div className="modal-dialog modal-dialog-centered sw-manage-inspections-modal">
               <div className="modal-content sw-modal-panel border-0 shadow-sm overflow-hidden">
                 <div className="sw-modal-header-bar d-flex align-items-center justify-content-between">
-                  <h5 className="modal-title mb-0">Manage Inspections</h5>
+                  <h5 className="modal-title mb-0">{ modalType === "manageInspections" ? "Manage Inspections" : "Publish Inspections"}</h5>
                   <button
                     type="button"
                     className="btn-close btn-close-white"
@@ -273,7 +297,7 @@ export default function SideNav() {
                     aria-label="Close"
                   />
                 </div>
-                <div className="p-3">
+                {/* <div className="p-3">
                   <div className="d-flex align-items-center overflow-hidden sw-modal-tabs border rounded">
                     <button
                       type="button"
@@ -299,10 +323,10 @@ export default function SideNav() {
                       Completed
                     </button>
                   </div>
-                </div>
+                </div> */}
 
                 <div
-                  className="modal-body pt-0 pb-3 overflow-y-auto"
+                  className="modal-body pt-3 pb-3 overflow-y-auto"
                   style={{ height: "60vh" }}
                 >
                   <div className="sw-modal-body-panel d-flex">
