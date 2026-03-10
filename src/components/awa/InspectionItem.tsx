@@ -45,7 +45,7 @@ export default function InspectionItem({
           <div className="d-flex justify-content-center h-fit-content">
             {!fullView ? (
               <button
-                className="d-flex btn align-items-center bg-white text-sw rounded-circle p-2 shadow-sm"
+                className="d-flex btn align-items-center bg-white text-sw rounded-circle p-2 shadow-sm action-btn"
                 type="button"
                 title={correction ? "Review" : "Edit"}
               >
@@ -76,14 +76,14 @@ export default function InspectionItem({
             ) : (
               <div className="d-flex gap-2">
                 <button
-                  className="d-flex btn align-items-center bg-white text-sw rounded-circle p-2 shadow-sm"
+                  className="d-flex btn align-items-center bg-white text-sw rounded-circle p-2 shadow-sm action-btn"
                   type="button"
                   title="Reassign"
                 >
                   <BsPersonUp size={18} />
                 </button>
                 <button
-                  className="d-flex text-danger btn align-items-center bg-white rounded-circle p-2 shadow-sm"
+                  className="d-flex text-danger btn align-items-center bg-white rounded-circle p-2 shadow-sm action-btn"
                   type="button"
                   title="Delete"
                 >

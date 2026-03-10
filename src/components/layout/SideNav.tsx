@@ -129,7 +129,12 @@ export default function SideNav() {
   };
 
   const renderActions = () => {
-    return (
+   if (pathname === "/" ){
+     return (
+      <>
+      <div className="mt-2 mb-2 small fs-half text-uppercase text-muted fw-semibold">
+        Actions
+      </div>
       <div className="d-flex flex-column gap-2 mb-3">
         <button
           className="btn btn-outline-primary text-start shadow-sm"
@@ -154,8 +159,10 @@ export default function SideNav() {
           <BsClipboardCheck size={18} className="me-2" />
           Manage Corrections
         </button>
-      </div>
+      </div></>
     );
+  }
+  return <></>;
   };
 
   return (
@@ -181,9 +188,7 @@ export default function SideNav() {
 
         <div className="p-3 overflow-auto">
           <nav className="nav nav-pills flex-column gap-1">
-            <div className="mt-2 mb-2 small fs-half text-uppercase text-muted fw-semibold">
-              Actions
-            </div>
+
             {renderActions()}
             <div className="mt-2 mb-2 small fs-half text-uppercase text-muted fw-semibold">
               Pages
@@ -296,7 +301,7 @@ export default function SideNav() {
                       }`}
                       onClick={() => setActiveInspectionTab("completed")}
                     >
-                      Completed
+                      Publish Queue
                     </button>
                   </div>
                 </div>
